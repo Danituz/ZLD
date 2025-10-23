@@ -5,9 +5,17 @@ import { Table, THead, TH, TRow, TD } from "@/components/ui/table";
 import { leaderboard } from "@/app/data/leaderboard";
 import { AnimatedNumber } from "@/components/ui/animated-number";
 import { Trophy, Filter, Users, ChevronLeft, ChevronRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationPrevious,
+  PaginationNext,
+  PaginationEllipsis,
+} from "@/components/shadcn/pagination";
 
 const filters = ["Global", "Semanal", "Mensual"] as const;
 const PAGE_SIZE = 10;
@@ -16,7 +24,7 @@ export function RankingTable() {
   const [filter, setFilter] = useState<(typeof filters)[number]>("Global");
   const [page, setPage] = useState(1);
 
-  // ðŸ”¹ Filtros simulados (mock)
+  // Filtros simulados (mock)
   const rows = useMemo(() => {
     let data = leaderboard;
     if (filter === "Semanal") data = [...leaderboard].slice(0, 20);
@@ -47,6 +55,19 @@ export function RankingTable() {
     </span>
   );
 
+  const getPages = (current: number, total: number) => {
+    const delta = 1;
+    const pages: (number | string)[] = [];
+    const left = Math.max(2, current - delta);
+    const right = Math.min(total - 1, current + delta);
+    pages.push(1);
+    if (left > 2) pages.push("ellipsis-left");
+    for (let i = left; i <= right; i++) pages.push(i);
+    if (right < total - 1) pages.push("ellipsis-right");
+    if (total > 1) pages.push(total);
+    return pages;
+  };
+
   return (
     <div className="w-full">
       {/* ===== HEADER ===== */}
@@ -54,7 +75,7 @@ export function RankingTable() {
         <div className="flex items-center gap-2">
           <Trophy className="text-accent w-5 h-5" />
           <h3 className="font-display text-xl font-semibold tracking-wide">
-            Tabla de Clasificación
+            Tabla de ClasificaciÃ³n
           </h3>
         </div>
 
@@ -84,17 +105,17 @@ export function RankingTable() {
       {/* ===== TABLA ===== */}
       <Table>
         <THead>
-  <TRow>
-    <TH className="w-[12%]">#</TH>
-    <TH className="w-[58%]">
-      <div className="flex items-center gap-1">
-        <Users size={16} className="text-accent" />
-        Jugador
-      </div>
-    </TH>
-    <TH className="w-[30%] text-right">XP</TH>
-  </TRow>
-</THead>
+          <TRow>
+            <TH className="w-[12%]">#</TH>
+            <TH className="w-[58%]">
+              <div className="flex items-center gap-1">
+                <Users size={16} className="text-accent" />
+                Jugador
+              </div>
+            </TH>
+            <TH className="w-[30%] text-right">XP</TH>
+          </TRow>
+        </THead>
 
         <AnimatePresence mode="wait">
           <motion.tbody
@@ -106,52 +127,80 @@ export function RankingTable() {
           >
             {paginated.map((r) => (
               <TRow key={r.id}>
-  <TD>
-    <span className="inline-flex items-center gap-2">
-      <span className={medalClass(r.rank)}>{r.rank}</span>
-    </span>
-  </TD>
-  <TD className="truncate">
-    <div className="flex items-center min-w-0">
-      {avatar(r.player)}
-      <span className="truncate">{r.player}</span>
-    </div>
-  </TD>
-  <TD className="text-right text-accent font-semibold tabular-nums">
-    <AnimatedNumber value={r.xp} />
-  </TD>
-</TRow>
+                <TD>
+                  <span className="inline-flex items-center gap-2">
+                    <span className={medalClass(r.rank)}>{r.rank}</span>
+                  </span>
+                </TD>
+                <TD className="truncate">
+                  <div className="flex items-center min-w-0">
+                    {avatar(r.player)}
+                    <span className="truncate">{r.player}</span>
+                  </div>
+                </TD>
+                <TD className="text-right text-accent font-semibold tabular-nums">
+                  <AnimatedNumber value={r.xp} />
+                </TD>
+              </TRow>
             ))}
           </motion.tbody>
         </AnimatePresence>
       </Table>
 
       {/* ===== PAGINADOR ===== */}
-      <div className="flex justify-center items-center gap-3 mt-5 flex-wrap">
-        <Button
-          variant="ghost"
-          size="sm"
-          disabled={page === 1}
-          onClick={() => handlePage(page - 1)}
-          className="flex items-center gap-1"
-        >
-          <ChevronLeft size={16} /> Anterior
-        </Button>
+      <div className="mt-5">
+        <Pagination>
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious
+                href="#"
+                className={cn(page === 1 && "pointer-events-none opacity-50")}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handlePage(page - 1);
+                }}
+              >
+                <ChevronLeft size={16} /> Anterior
+              </PaginationPrevious>
+            </PaginationItem>
 
-        <div className="text-sm text-muted">
-  Página <span className="text-accent font-semibold">{page}</span> de <span className="text-accent font-semibold">{totalPages}</span>
-</div>
+            {getPages(page, totalPages).map((p, idx) =>
+              typeof p === "number" ? (
+                <PaginationItem key={p}>
+                  <PaginationLink
+                    href="#"
+                    isActive={p === page}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handlePage(p);
+                    }}
+                  >
+                    {p}
+                  </PaginationLink>
+                </PaginationItem>
+              ) : (
+                <PaginationItem key={`${p}-${idx}`}>
+                  <PaginationEllipsis />
+                </PaginationItem>
+              )
+            )}
 
-        <Button
-          variant="ghost"
-          size="sm"
-          disabled={page === totalPages}
-          onClick={() => handlePage(page + 1)}
-          className="flex items-center gap-1"
-        >
-          Siguiente <ChevronRight size={16} />
-        </Button>
+            <PaginationItem>
+              <PaginationNext
+                href="#"
+                className={cn(page === totalPages && "pointer-events-none opacity-50")}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handlePage(page + 1);
+                }}
+              >
+                Siguiente <ChevronRight size={16} />
+              </PaginationNext>
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
       </div>
     </div>
   );
 }
+
