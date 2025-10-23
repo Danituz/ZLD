@@ -1,26 +1,64 @@
+/* app/globals.css */
 @import "tailwindcss";
 
+/* ===== CSS Vars (propias de tu tema) ===== */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #0b1220;
+  --fg: #e5e7eb;
+  --accent: #22d3ee;
+  --warn: #f59e0b;
+  --muted: #94a3b8;
+  --card: #121a2b;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ===== Tailwind v4 Tokens (mapeo a utilidades como bg-bg, text-fg, etc.) ===== */
+@theme {
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-accent: var(--accent);
+  --color-warn: var(--warn);
+  --color-muted: var(--muted);
+  --color-card: var(--card);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Base */
+html { scroll-behavior: smooth; }
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-inter), system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+/* Tipografías helper */
+.font-display { font-family: var(--font-orbitron), sans-serif; }
+.font-sans { font-family: var(--font-inter), system-ui, sans-serif; }
+
+/* FX */
+.grain { background-image: url("/images/grain.png"); mix-blend-mode: overlay; opacity: .08; }
+@keyframes fog { 0%{opacity:.3; transform:translateY(0)} 100%{opacity:.6; transform:translateY(-10px)} }
+.fog { animation: fog 6s ease-in-out infinite alternate; }
+
+@media (prefers-reduced-motion: reduce) { .fog { animation: none; opacity: .25; } }
+.no-ambient .grain { display: none; }
+.no-ambient .fog { animation: none; opacity: 0; }
+
+/* Ambient gradient sutil */
+body::before {
+  content: "";
+  position: fixed;
+  inset: -10%;
+  pointer-events: none;
+  background:
+    radial-gradient(60% 40% at 20% 10%, rgba(34,211,238,.08), transparent),
+    radial-gradient(50% 40% at 80% 90%, rgba(245,158,11,.06), transparent);
+  z-index: 0;
+}
+
+/* Utils */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+::selection { background: color-mix(in srgb, var(--accent) 40%, transparent); color: #001116; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 4px; }

@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
 
-## Getting Started
+# 🧟‍♂️ Zombies: Last Dawn
 
-First, run the development server:
+### PWA oficial del videojuego — Sobrevive al amanecer eterno ☀️
+
+![Last Dawn Banner](public/images/og/og.png)
+
+![Next.js](https://img.shields.io/badge/Next.js_16-black?logo=nextdotjs)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS_4.0-38bdf8?logo=tailwindcss&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript)
+![Framer Motion](https://img.shields.io/badge/Framer_Motion-EF0074?logo=framer)
+![License](https://img.shields.io/badge/license-MIT-green)
+
+</div>
+
+---
+
+## 🧭 Descripción
+
+**Zombies: Last Dawn** es una *Progressive Web App* (PWA) creada como landing y companion app para el videojuego homónimo.
+
+Incluye información dinámica del universo del juego:
+- Personajes 👥  
+- Armas 🔫  
+- Mapas 🗺️  
+- Enemigos 💀  
+- Ranking global 🏆  
+- Noticias 📰  
+- Galería 🎞️  
+- Contacto 📬  
+
+Todo en una sola página, con animaciones suaves, efectos de partículas y diseño militar-tecnológico.
+
+---
+
+## 🚀 Tecnologías principales
+
+| Tecnología | Uso |
+|-------------|-----|
+| **Next.js 16** | Framework principal |
+| **TypeScript** | Tipado y mantenibilidad |
+| **TailwindCSS v4** | Estilos rápidos y responsivos |
+| **Framer Motion** | Animaciones y transiciones |
+| **Lucide React / Radix UI** | Iconos y componentes accesibles |
+| **next-pwa** | Soporte offline e instalación PWA |
+| **Supabase (futuro)** | Rankings en tiempo real |
+
+---
+
+## ⚙️ Instalación y ejecución
 
 ```bash
+# 1️⃣ Clonar el repositorio
+git clone https://github.com/tuusuario/last-dawn-pwa.git
+cd last-dawn-pwa
+
+# 2️⃣ Instalar dependencias
+npm install
+
+# 3️⃣ Ejecutar en modo desarrollo
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# 4️⃣ Abrir en el navegador
+# 👉 http://localhost:3000
