@@ -5,7 +5,7 @@ import { useState } from "react";
 const images = [
   "/images/characters/john-ashton.jpg",
   "/images/maps/ciudad-en-ruinas.jpg",
-  "/images/enemies/tank.jpg",
+  "/images/enemies/phaser.jpg",
   "/images/weapons/francotirador.jpg",
 ];
 

@@ -4,6 +4,7 @@ import { Hero } from "@/components/ui/hero";
 import { Section } from "@/components/ui/section";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { InstallButton } from "@/components/ui/install-button";
 
 import { CharactersGrid, CharactersGridDesktop } from "@/components/shell/characters-grid";
 import { WeaponsTabs } from "@/components/shell/weapons-tabs";
@@ -27,6 +28,7 @@ export default function OnePageLanding() {
         <a href="https://youtu.be/xJELs5XqgfM" target="_blank" rel="noreferrer">
           <Button variant="outline">Ver tráiler</Button>
         </a>
+        <InstallButton />
       </Hero>
 
       {/* EL JUEGO */}

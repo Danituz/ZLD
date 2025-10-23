@@ -3,6 +3,7 @@ import { Orbitron, Inter } from "next/font/google";
 import "./globals.css";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { PageTransition } from "@/components/layout/page-transition";
+import { SWRegister } from "@/components/pwa/sw-register";
 
 
 const orbitron = Orbitron({ subsets: ["latin"], variable: "--font-orbitron" });
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Zombies: Last Dawn",
     description: "Sobrevive al amanecer eterno. Landing + companion app.",
-    images: [{ url: "/images/og/og.png" }], // <-- usa png (o sube el .jpg)
+    images: [{ url: "/images/og/og.jpg" }], // <-- usa png (o sube el .jpg)
     type: "website",
     locale: "es_ES",
   },
@@ -47,6 +48,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </PageTransition>
 
         <SiteFooter />
+        <SWRegister />
       </body>
     </html>
   );
