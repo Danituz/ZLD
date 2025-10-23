@@ -2,13 +2,13 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center rounded-xl text-sm font-semibold transition-all",
+  "inline-flex items-center justify-center rounded-xl text-sm font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-bg",
   {
     variants: {
       variant: {
         default: "bg-accent text-bg hover:brightness-110 shadow-md hover:shadow-accent/40",
         ghost: "text-accent hover:text-fg hover:bg-accent/10",
-        outline: "border border-accent text-accent hover:bg-accent/10",
+        outline: "border border-accent/40 text-accent hover:bg-accent/10",
       },
       size: {
         default: "px-4 py-2",

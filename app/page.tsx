@@ -23,8 +23,10 @@ export default function OnePageLanding() {
         title={<>ZOMBIES: <span className="text-accent">LAST DAWN</span></>}
         subtitle={<>Sobrevive al amanecer eterno. Domina el arsenal, lidera el escuadrón y resiste las oleadas.</>}
       >
-        <a href="#personajes"><Button variant="outline">Ver Personajes</Button></a>
-        <a href="#arsenal"><Button>Explorar Arsenal</Button></a>
+        <a href="#juego"><Button>Jugar ahora</Button></a>
+        <a href="https://youtu.be/xJELs5XqgfM" target="_blank" rel="noreferrer">
+          <Button variant="outline">Ver tráiler</Button>
+        </a>
       </Hero>
 
       {/* EL JUEGO */}
